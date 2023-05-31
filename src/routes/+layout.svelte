@@ -2,6 +2,8 @@
 	import events from '$lib/stores/events';
 	import pool from '$lib/stores/pool';
 
+	import Footer from '$lib/components/Footer.svelte';
+	import Nav from '$lib/components/Nav.svelte';
 	import filters from '$lib/stores/filters';
 	import relays from '$lib/stores/relays';
 	import { onMount } from 'svelte';
@@ -17,4 +19,8 @@
 	});
 </script>
 
-<slot />
+<div class="flex flex-col w-screen min-h-screen space-y-12">
+	<Nav />
+	<slot />
+	<Footer />
+</div>

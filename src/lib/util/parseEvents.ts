@@ -1,19 +1,38 @@
 import { parseReferences, type Event } from 'nostr-tools';
 
+//const urlRegex = /^(https?):\/\/[^\s/$.?#].[^\s]*$/;
+const urlRegex = /^(https?):\/\/([^\s/$.?#]+).*/;
+
 export function parseEvents(event: Event): string {
 	const references = parseReferences(event);
-	const simpleAugmentedContent = event.content;
-
+	let augmentedContent = event.content;
 	for (let i = 0; i < references.length; i++) {
 		const { text, profile, event, address } = references[i];
-		const augmentedReference = profile
-			? `<strong>${profile.pubkey}</strong>`
-			: event
-			? `<em>${event.id}</em>`
-			: address
-			? `<a href="${text}">[link]</a>`
-			: text;
-		simpleAugmentedContent.replaceAll(text, augmentedReference);
+		let augmentedReference = ``;
+		if (profile) {
+			augmentedReference = profile.pubkey;
+		} else if (event) {
+			augmentedReference = `<span class="text-purple-400 font-semibold"><a href="events/${event.id}">${event.id}</a></span>`;
+		} else if (address) {
+			augmentedReference = `<a href="${text}">${text} [link]</a>`;
+		} else {
+			augmentedReference = text;
+		}
+		augmentedContent = augmentedContent.replaceAll(text, augmentedReference);
 	}
-	return simpleAugmentedContent;
+
+	const resultContent = augmentedContent
+		.split(` `)
+		.map((str) => {
+			if (urlRegex.test(str)) {
+				const addurl = `<span class="text-blue-400 font-bold"><a href="${str}">${str}</a></span>`;
+				console.log(JSON.stringify(addurl, null, 4), `addurl`);
+				return addurl;
+			} else {
+				return str;
+			}
+		})
+		.join(` `);
+
+	return resultContent;
 }
