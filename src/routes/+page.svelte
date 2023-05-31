@@ -36,9 +36,9 @@
 
 <div class="flex flex-col w-screen min-h-screen space-y-12">
 	<Nav />
-	<div class={`flex flex-row w-full `}>
-		<div class="flex flex-col basis-2/3 justify-center px-8 space-y-8">
-			<div class="flex flex-row w-full space-x-4">
+	<div class={`flex flex-row  w-full `}>
+		<div class="flex flex-col basis-2/3 min-h-screen px-8 space-y-8">
+			<div class="flex flex-row h-12 w-full space-x-4">
 				{#each listops as { title, op }}
 					<button
 						on:click|preventDefault={op}
@@ -53,6 +53,11 @@
 					</button>
 				{/each}
 			</div>
+			{#if $events.length < 4}
+				<div class="flex flex-row w-full justify-center">
+					<Spinner />
+				</div>
+			{/if}
 			{#each $events.filter((e) => e.kind !== 0) as event}
 				<div
 					class="flex flex-col h-60 w-full justify-between space-y-8 bg-slate-100 shadow-sm rounded-3xl break-all"
