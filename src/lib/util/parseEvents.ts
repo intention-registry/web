@@ -26,7 +26,6 @@ export function parseEvents(event: Event): string {
 		.map((str) => {
 			if (urlRegex.test(str)) {
 				const addurl = `<span class="text-blue-400 font-bold"><a href="${str}">${str}</a></span>`;
-				console.log(JSON.stringify(addurl, null, 4), `addurl`);
 				return addurl;
 			} else {
 				return str;
