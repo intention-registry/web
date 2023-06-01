@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import view from '$lib/stores/view';
 
@@ -8,21 +9,19 @@
 <nav
 	class="flex flex-row min-h-16 w-full px-4 pb-3 space-x-24 items-center justify-between border-b border-slate-200"
 >
-	<a href="/">
-		<button
-			type={`button`}
-			class={``}
-			on:click|preventDefault={() => ($page.route.id === `/` ? view.set(`drawer`) : null)}
+	<button
+		type={`button`}
+		class={``}
+		on:click|preventDefault={() => ($page.route.id === `/` ? view.set(`drawer`) : goto(`/`))}
+	>
+		<div
+			class="border border-slate-800 pl-8 pr-8 py-[4px] bg-white justify-center items-center rounded-full text-slate-800 font-bold lowercase leading-[17px]"
 		>
-			<div
-				class="border border-slate-800 pl-8 pr-8 py-[4px] bg-white justify-center items-center rounded-full text-slate-800 font-bold lowercase leading-[17px]"
-			>
-				Intention Registry
-			</div>
-		</button>
-	</a>
+			Intention Registry
+		</div>
+	</button>
 
-	<div class="max-lg:hidden flex flex-row w-full space-x-12 flex-wrap">
+	<div class="max-sm:hidden flex flex-row w-full space-x-12 flex-wrap">
 		{#each navlinks as link}
 			<a href={`/${link}`}>
 				<p class="font-base font-medium text-base lowercase">
