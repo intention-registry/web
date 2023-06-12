@@ -21,7 +21,7 @@
 		</div>
 	</button>
 
-	<div class="max-sm:hidden flex flex-row w-full space-x-12 flex-wrap">
+	<div class="max-sm:hidden flex flex-row w-full space-x-12 flex-wrap items-center">
 		{#each navlinks as link}
 			<a href={`/${link}`}>
 				<p class="font-base font-medium text-base lowercase">

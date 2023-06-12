@@ -8,7 +8,7 @@
 	<div class="flex font-sans text-3xl">
 		{text1}
 	</div>
-	<div class="flex flex-row w-full px-48 justify-center">
+	<div class="flex flex-row w-full px-72 justify-center">
 		<input
 			class="input input-primary w-full border-2"
 			placeholder="search nostr relays"
